@@ -3,7 +3,6 @@ var http = require('http');
 var https = require('https');
 var urlparse = require('url').parse;
 
-var Canvas = require("canvas");
 var RGBColor = require("rgbcolor");
 var stackblur = require("stackblur");
 var xmldom = require('xmldom');
@@ -1438,7 +1437,7 @@ var xmldom = require('xmldom');
 				tempSvg.attributes['height'] = new svg.Property('height', this.attribute('height').value);
 				tempSvg.children = this.children;
 
-				var c = new Canvas();
+				var c = document.createElement('canvas');
 				c.width = this.attribute('width').toPixels('x') + this.attribute('x').toPixels('x');
 				c.height = this.attribute('height').toPixels('y')  + this.attribute('y').toPixels('y');
 				tempSvg.render(c.getContext('2d'));
@@ -1540,7 +1539,7 @@ var xmldom = require('xmldom');
 					tempSvg.attributes['height'] = new svg.Property('height', rootView.height);
 					tempSvg.children = [ group ];
 
-					var c = new Canvas();
+					var c = document.createElement('canvas');
 					c.width = rootView.width;
 					c.height = rootView.height;
 					var tempCtx = c.getContext('2d');
@@ -2092,7 +2091,7 @@ var xmldom = require('xmldom');
 			// Renders an embedded SVG to a png
 			var renderSvg = function(target, buffer) {
 				var str = buffer.toString('utf8');
-				var canvas = new Canvas();
+				var canvas = document.createElement('canvas');
 				canvg(canvas, str, {
 					ignoreDimensions: false,
 					ignoreAnimation: true,
@@ -2322,13 +2321,13 @@ var xmldom = require('xmldom');
 				var mask = element.attribute('mask').value;
 				element.attribute('mask').value = '';
 
-					var cMask = new Canvas();
+					var cMask = document.createElement('canvas');
 					cMask.width = x + width;
 					cMask.height = y + height;
 					var maskCtx = cMask.getContext('2d');
 					this.renderChildren(maskCtx);
 
-					var c = new Canvas();
+					var c = document.createElement('canvas');
 					c.width = x + width;
 					c.height = y + height;
 					var tempCtx = c.getContext('2d');
@@ -2400,7 +2399,7 @@ var xmldom = require('xmldom');
 				var px = extraPercent * width;
 				var py = extraPercent * height;
 
-				var c = new Canvas();
+				var c = document.createElement('canvas');
 				c.width = width + 2*px;
 				c.height = height + 2*py;
 				var tempCtx = c.getContext('2d');

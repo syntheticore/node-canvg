@@ -1,21 +1,13 @@
-# node-canvg
+# canvg-client
 
 A port of canvg, which pareses svg input and renders the result to a canvas.
 http://code.google.com/p/canvg/
 
+This fork is meant for client-only usage and does not depend on the Canvas package,
+which can make problems with platforms such as Heroku.
+
 ## Usage
 ```` js
 var canvg = require("canvg");
-var Canvas = require("canvas");
-
-var canvas = new Canvas();
-
-canvg(canvas, '<svg>...</svg>');
-
-/* and so on */
-
-````
-
-## Todo
-
-The canvg code is pretty much untouched. A lot of browser-specific code has to be removed or rewritten.
+var canvas = document.createElement('canvas');
+canvg(canvas, '<svg></svg>');
